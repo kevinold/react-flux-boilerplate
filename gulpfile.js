@@ -6,7 +6,7 @@ var reactify = require('reactify');
 var browserSync = require('browser-sync');
 
 // Static server
-gulp.task('browser-sync', ['vendorjs', 'appjs'], function() {
+gulp.task('browser-sync', ['appjs', 'vendorjs'], function() {
     browserSync({
         server: {
             baseDir: "./"
@@ -34,7 +34,7 @@ gulp.task('appjs', function () {
 });
 
 // use default task to launch BrowserSync and watch files
-gulp.task('default', ['vendorjs', 'appjs', 'browser-sync'], function () {
+gulp.task('default', ['appjs', 'vendorjs', 'browser-sync'], function () {
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
