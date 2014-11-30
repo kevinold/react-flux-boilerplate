@@ -26,7 +26,7 @@ gulp.task('vendorjs', function () {
 });
 
 gulp.task('appjs', function () {
-    return gulp.src('js/main.js')
+    return gulp.src('js/app.js')
         .pipe(browserify({
           transform: ['reactify']
         }))
