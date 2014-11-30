@@ -1,7 +1,8 @@
-/** @jsx React.DOM */
+// This file bootstraps the entire application
 
+var App = require('./components/App.react');
 var React = require('react');
-var App = require('./App');
+window.React = React; // export for http://fb.me/react-devtools
 
 function generateData(count) {
   var data = [];
