@@ -24,6 +24,7 @@ var AppDispatcher = assign(new Dispatcher(), {
    * type and additional data coming from the view.
    */
   handleViewAction: function(action) {
+    console.log('action: ', action);
     var payload = {
       source: PayloadSources.VIEW_ACTION,
       action: action
