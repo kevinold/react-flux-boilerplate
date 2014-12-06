@@ -9,7 +9,7 @@ var browserSync = require('browser-sync');
 gulp.task('browser-sync', ['appjs', 'vendorjs'], function() {
     browserSync({
         server: {
-            baseDir: "./"
+            baseDir: "./dist"
         }
     });
 });
@@ -26,20 +26,28 @@ gulp.task('vendorjs', function () {
 });
 
 gulp.task('appjs', function () {
-    return gulp.src('js/app.js')
+    return gulp.src('src/js/app.js')
         .pipe(browserify({
           transform: ['reactify']
         }))
         .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('copy', function() {
+  gulp.src('src/index.html')
+    .pipe(gulp.dest('dist'));
+
+  gulp.src('src/css/**/*')
+    .pipe(gulp.dest('dist/css'));
+});
+
 // use default task to launch BrowserSync and watch files
-gulp.task('default', ['appjs', 'vendorjs', 'browser-sync'], function () {
+gulp.task('default', ['copy', 'appjs', 'vendorjs', 'browser-sync'], function () {
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
     //gulp.watch("js/*.js", ['js', browserSync.reload]);
-    gulp.watch("js/**/*.js", ['appjs', browserSync.reload]);
+    gulp.watch("src/js/**/*.js", ['appjs', browserSync.reload]);
 
-    gulp.watch("*.html", ['bs-reload']);
+    gulp.watch("src/*.html", ['bs-reload']);
 });
