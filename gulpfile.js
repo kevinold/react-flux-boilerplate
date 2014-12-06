@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var browserify = require('gulp-browserify');
 var reactify = require('reactify');
 var browserSync = require('browser-sync');
+var del = require('del');
 
 // Static server
 gulp.task('browser-sync', ['appjs', 'vendorjs'], function() {
@@ -14,12 +15,22 @@ gulp.task('browser-sync', ['appjs', 'vendorjs'], function() {
     });
 });
 
+gulp.task('clean-dist', function () {
+  del('dist/**/*');
+});
+
 gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
 gulp.task('vendorjs', function () {
-    return gulp.src('vendor/*.js')
+    return gulp.src(
+        [
+          'src/vendor/lodash.underscore.js',
+          'src/vendor/backbone.js',
+          'src/vendor/accounting.js',
+          'src/vendor/faker.js'
+        ])
         .pipe(uglify())
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('dist/js'));
@@ -42,7 +53,7 @@ gulp.task('copy', function() {
 });
 
 // use default task to launch BrowserSync and watch files
-gulp.task('default', ['copy', 'appjs', 'vendorjs', 'browser-sync'], function () {
+gulp.task('default', ['clean-dist', 'copy', 'appjs', 'vendorjs', 'browser-sync'], function () {
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
