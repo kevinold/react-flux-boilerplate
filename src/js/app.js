@@ -1,21 +1,15 @@
 // This file bootstraps the entire application
 
+var Data = require('./Data.js');
+var DataAPI = require('./utils/DataAPI.js');
 var App = require('./components/App.react');
 var React = require('react');
 window.React = React; // export for http://fb.me/react-devtools
 
-function generateData(count) {
-  var data = [];
-  for (var i = 0; i < count; i++) {
-    data.push({
-      id: faker.random.number(0, 1000),
-      merchant: faker.Company.companyName(),
-      total: faker.random.number(1.00, 150.00)
-    });
-  }
-  return data;
-}
+// Load Mock Data into localStorage
+Data.init();
 
-var data = generateData(10);
+// Load Mock API Call
+DataAPI.getData();
 
-React.render(<App data={data} />, document.getElementById('app'));
+React.render(<App />, document.getElementById('app'));

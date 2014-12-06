@@ -4,6 +4,7 @@ module.exports = {
 
   ActionTypes: keyMirror({
     CLICK_BUTTON: null,
+    RECEIVE_DATA: null,
   }),
 
   PayloadSources: keyMirror({

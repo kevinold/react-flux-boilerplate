@@ -6,7 +6,11 @@ var assign = require('object-assign');
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
-var _items = ['three', 'two'];
+var _items = [];
+
+function loadItemData(data) {
+  _items = data;
+}
 
 function addItem(item) {
   _items.push(item);
@@ -36,6 +40,10 @@ AppStore.dispatchToken = AppDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
+
+    case ActionTypes.RECEIVE_DATA:
+      loadItemData(action.data);
+      break;
 
     case ActionTypes.CLICK_BUTTON:
       console.log('store action: ', action);
