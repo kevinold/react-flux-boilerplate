@@ -1,26 +1,22 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var nodemon = require('gulp-nodemon');
 var browserify = require('gulp-browserify');
 var reactify = require('reactify');
 var browserSync = require('browser-sync');
 var del = require('del');
+var reload = browserSync.reload;
 
-// Static server
-gulp.task('browser-sync', ['appjs', 'vendorjs'], function() {
+// Proxy server
+gulp.task('browser-sync', ['nodemon', 'appjs', 'vendorjs'], function() {
     browserSync({
-        server: {
-            baseDir: "./dist"
-        }
+      proxy: "localhost:3000"
     });
 });
 
 gulp.task('clean-dist', function () {
   del('dist/**/*');
-});
-
-gulp.task('bs-reload', function () {
-    browserSync.reload();
 });
 
 gulp.task('vendorjs', function () {
@@ -52,8 +48,12 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('nodemon', function() {
+  nodemon({ script: 'server.js' });
+});
+
 // use default task to launch BrowserSync and watch files
-gulp.task('default', ['clean-dist', 'copy', 'appjs', 'vendorjs', 'browser-sync'], function () {
+gulp.task('default', ['clean-dist', 'nodemon', 'copy', 'appjs', 'vendorjs', 'browser-sync'], function () {
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
