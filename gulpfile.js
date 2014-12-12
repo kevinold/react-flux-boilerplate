@@ -2,7 +2,8 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var nodemon = require('gulp-nodemon');
-var browserify = require('gulp-browserify');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 var reactify = require('reactify');
 var browserSync = require('browser-sync');
 var del = require('del');
@@ -33,11 +34,13 @@ gulp.task('vendorjs', function () {
 });
 
 gulp.task('appjs', function () {
-    return gulp.src('src/js/app.js')
-        .pipe(browserify({
-          transform: ['reactify']
-        }))
-        .pipe(gulp.dest('dist/js'));
+  var b = browserify();
+  b.transform(reactify);
+  b.add('./src/js/app.js');
+
+  return b.bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('copy', function() {
