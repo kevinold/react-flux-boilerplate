@@ -1,17 +1,17 @@
 {
-  "name": "react-bootstrap-template",
-  "version": "0.0.0",
-  "description": "Project bootstrap with ReactJS and Bootstrap",
+  "name": "react-flux-boilerplate",
+  "version": "0.0.1",
+  "description": "ReactJS and Bootstrap Boilerplate with simple Flux architecture",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:kevinold/react-bootstrap-template.git"
+    "url": "git@github.com:kevinold/react-flux-boilerplate.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kevin Old <kevin@kevinold.com>",
+  "license": "GPL",
   "devDependencies": {
     "browser-sync": "^1.7.2",
     "browserify": "^7.0.0",
