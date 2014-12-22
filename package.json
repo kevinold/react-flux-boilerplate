@@ -31,9 +31,11 @@
   "dependencies": {
     "faker": "^2.1.1",
     "flux": "^2.0.1",
+    "good": "^5.1.0",
+    "good-console": "^3.1.2",
+    "hapi": "^8.0.0",
     "keymirror": "^0.1.0",
     "object-assign": "^2.0.0",
-    "react": "^0.12.1",
-    "hapi": "^7.5.2"
+    "react": "^0.12.1"
   }
 }
