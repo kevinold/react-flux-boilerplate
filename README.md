@@ -19,6 +19,8 @@ Then visit: http://localhost:3000
 - Flux
 - BrowserSync
 - hapi
+- good
+- good-console
 - nodemon
 
 
